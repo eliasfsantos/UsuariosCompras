@@ -12,11 +12,11 @@ export class ComprasService {
   ) { }
 
   async findAll(): Promise<Compras[]> {
-    return this.comprasRepository.find({ relations: ["endereco", "usuarios"] });
+    return this.comprasRepository.find({ relations: ["endereco", "usuario"] });
   }
 
   async read(id: number) {
-    return await this.comprasRepository.findOne({ where: { id: id }, relations: ["endereco", "usuarios"] });
+    return await this.comprasRepository.findOne({ where: { id: id }, relations: ["endereco", "usuario"] });
   }
 
   async criar(data: ComprasDTO) {

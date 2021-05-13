@@ -20,16 +20,16 @@ export class UsuariosController {
     };
   }
 
-  @Post()
-  async criarUsuarios(@Body() data: UsuariosDTO) {
-    if(data.senha.length > 11) return {
-      statusCode: HttpStatus.CREATED,
-      message: 'Usuario adicionado com sucesso',
-      data: await this.usuariosService.criar(data),
-    };
-    else return {
-      statusCode: HttpStatus.LENGTH_REQUIRED,
-      message: 'senha precisa ter pelo menos 12 caracteres'
-    }
-  }
+  // @Post()
+  // async criarUsuarios(@Body() data: UsuariosDTO) {
+  //   if(data.senha.length > 11) return {
+  //     statusCode: HttpStatus.CREATED,
+  //     message: 'Usuario adicionado com sucesso',
+  //     data: await this.usuariosService.criar(data),
+  //   };
+  //   else return {
+  //     statusCode: HttpStatus.LENGTH_REQUIRED,
+  //     message: 'senha precisa ter pelo menos 12 caracteres'
+  //   }
+  // }
 }

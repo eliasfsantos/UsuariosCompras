@@ -4,5 +4,6 @@ export interface UsuariosDTO {
     nome: string;
     email: string;
     senha: string;
+    confirmacao_senha: string;
     endereco: Endereco
   }
