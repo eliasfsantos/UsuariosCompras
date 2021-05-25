@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpStatus, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, HttpStatus, Param, Post, UsePipes, ValidationPipe } from '@nestjs/common';
 import { validate } from 'class-validator';
 
 import { CriarUsuarioDto } from './dto/criarUsuarioDto';
@@ -22,6 +22,7 @@ export class UsuariosController {
   }
 
   @Post('/')
+  //@UsePipes(new ValidationPipe({ transform: true })) // foi adicionado globalmente em main.ts
   async criarUsuarios(@Body() criarUsuarioDto: CriarUsuarioDto) {
     if (criarUsuarioDto.confirmacaoDeSenha == criarUsuarioDto.senha) return {
       statusCode: HttpStatus.CREATED,

@@ -1,4 +1,4 @@
-import { IsEmail, MinLength } from 'class-validator';
+import { IsEmail, MinLength, ValidateNested } from 'class-validator';
 import { Endereco } from 'src/models';
 export class CriarUsuarioDto {
 
@@ -14,5 +14,6 @@ export class CriarUsuarioDto {
   @MinLength(8)
   confirmacaoDeSenha: string;
 
+  @ValidateNested()
   endereco: Endereco
 }

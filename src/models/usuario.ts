@@ -1,4 +1,4 @@
-import { IsEmail, Length } from 'class-validator';
+import { IsEmail, Length, ValidateNested } from 'class-validator';
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { Endereco } from './endereco';
 
@@ -19,6 +19,7 @@ export class Usuario {
   @Length(8, 255)
   senha: string;
 
+  @ValidateNested()
   @OneToMany(type => Endereco, endereco => endereco.usuario, {
     cascade: true
   }) // note: we will create usuario property in the Endereco class below

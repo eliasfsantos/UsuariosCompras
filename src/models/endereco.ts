@@ -1,4 +1,4 @@
-import { IsDefined } from "class-validator";
+import { IsDefined, MinLength } from "class-validator";
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from "typeorm";
 import { Usuario } from "./usuario";
 
@@ -8,11 +8,11 @@ export class Endereco {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @IsDefined()
+    @MinLength(1)
     @Column()
     logradouro: string;
 
-    @IsDefined()
+    @MinLength(1)
     @Column()
     numero: string;
 
@@ -24,11 +24,11 @@ export class Endereco {
     @Column()
     casa: boolean;
 
-    @IsDefined()
+    @MinLength(1)
     @Column()
     bairro: string;
 
-    @IsDefined()
+    @MinLength(1)
     @Column()
     cep: string;
 
