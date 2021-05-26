@@ -19,7 +19,7 @@ export class UsuarioService {
   }
 
   async findOne(id: number): Promise<Usuario> {
-    return this.usuarioRepository.findOne({ where: { id: id }, relations: ["endereco"] });
+    return this.usuarioRepository.findOne({ where: { id: id }, relations: ["enderecos"] });
   }
 
   async criar(data: CriarUsuarioDto): Promise<Usuario> {
