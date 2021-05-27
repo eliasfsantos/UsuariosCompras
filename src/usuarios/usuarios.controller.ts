@@ -20,6 +20,10 @@ export class UsuariosController {
   readUser(@Param('id') id) {
     return this.usuarioService.findOne(id)
   }
+  @Get('/:id/compras')
+  ComprasUsuario(@Param('id') id) {
+    return this.usuarioService.findOne(id) // modificar
+  }
 
   @Post('/')
   //@UsePipes(new ValidationPipe({ transform: true })) // foi adicionado globalmente em main.ts
