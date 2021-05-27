@@ -1,15 +1,12 @@
 import { Module } from '@nestjs/common';
-import { DatabaseModule } from 'src/database/database.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Compra, Endereco, Usuario } from 'src/models';
 import { ComprasController } from './compras.controller';
-import { comprasProviders } from './compras.providers';
-import { ComprasService } from './compras.service';
+import { CompraService } from './compra.service';
 
 @Module({
-    imports: [DatabaseModule],
-    controllers: [ComprasController],
-    providers: [
-      ...comprasProviders,
-      ComprasService,
-    ],
+  imports: [TypeOrmModule.forFeature([Compra, Usuario, Endereco])],
+  controllers: [ComprasController],
+  providers: [CompraService]
 })
-export class ComprasModule {}
+export class ComprasModule { }

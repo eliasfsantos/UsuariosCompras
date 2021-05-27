@@ -1,19 +1,19 @@
 import { Body, Controller, Get, HttpStatus, Param, Post } from "@nestjs/common";
-import { ComprasDTO } from "./compras.dto";
-import { Compras } from "./compras.entity";
-import { ComprasService } from "./compras.service";
+import { CriarCompraDTO } from "./dto/criarCompraDto";
+import { Compra } from "../models/compra";
+import { CompraService } from "./compra.service";
 
 @Controller('compras')
 export class ComprasController {
-  constructor(private readonly comprasService:ComprasService) {}
+  constructor(private readonly comprasService: CompraService) { }
 
   @Get()
-  async getCompras(): Promise<Compras[]>{
+  async getCompras(): Promise<Compra[]> {
     return this.comprasService.findAll();
   }
 
   @Get(':id')
-  async readUser(@Param('id') id: number) {
+  async readCompra(@Param('id') id: number) {
     return {
       statusCode: HttpStatus.OK,
       data: await this.comprasService.read(id),
@@ -21,7 +21,7 @@ export class ComprasController {
   }
 
   @Post()
-  async criarUsuarios(@Body() data: ComprasDTO) {
+  async criarCompra(@Body() data: CriarCompraDTO) {
     return {
       statusCode: HttpStatus.CREATED,
       message: 'Compra adicionada com sucesso',

@@ -1,25 +1,32 @@
-import { Endereco } from "src/usuarios/endereco.entity";
-import { Usuarios } from "src/usuarios/usuarios.entity";
+import { IsDefined, IsISO8601 } from "class-validator";
+import { Endereco } from "src/models/endereco";
+import { Usuario } from "src/models/usuario";
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
-export class Compras {
+export class Compra {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @ManyToOne(() => Usuarios)
+    @IsDefined()
+    @ManyToOne(() => Usuario)
     @JoinColumn()
-    usuario: Usuarios
+    usuario: Usuario
 
+    @IsDefined()
     @Column()
     total: string;
 
+    @IsDefined()
     @Column()
     loja: string;
 
+    @IsDefined()
+    @IsISO8601()
     @Column()
     data: string;
 
+    @IsDefined()
     @ManyToOne(() => Endereco)
     @JoinColumn()
     endereco: Endereco
