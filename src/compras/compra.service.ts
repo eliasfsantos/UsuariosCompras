@@ -19,6 +19,7 @@ export class CompraService {
     return await this.compraRepository.findOne({ where: { id: id }, relations: ["endereco", "usuario"] });
   }
 
+
   async criar(compra: CriarCompraDTO) {
     const novaCompra = this.compraRepository.create(compra)
     await this.compraRepository.save(novaCompra)

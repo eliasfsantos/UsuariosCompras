@@ -1,4 +1,4 @@
-import { IsDate, IsDefined, IsISO8601, ValidateNested } from 'class-validator';
+import { IsDefined, IsISO8601 } from 'class-validator';
 import { Endereco } from 'src/models/endereco';
 import { Usuario } from 'src/models/usuario';
 
