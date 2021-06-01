@@ -1,11 +1,6 @@
-import { Body, Controller, Get, HttpStatus, Param, Post, UsePipes, ValidationPipe } from '@nestjs/common';
-import { validate } from 'class-validator';
-
+import { Body, Controller, Get, HttpStatus, Param, Post } from '@nestjs/common';
 import { CriarUsuarioDto } from './dto/criarUsuarioDto';
 import { UsuarioService } from './usuario.services';
-import { Usuario } from "src/models/usuario";
-import { Endereco } from 'src/models';
-
 
 @Controller('usuarios')
 export class UsuariosController {
@@ -22,7 +17,7 @@ export class UsuariosController {
   }
   @Get('/:id/compras')
   ComprasUsuario(@Param('id') id) {
-    return this.usuarioService.findOne(id) // modificar
+    return this.usuarioService.comprasUsuario(id)
   }
 
   @Post('/')
