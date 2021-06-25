@@ -6,11 +6,11 @@ import * as Models from '../models'
   imports: [
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost',
+      host: 'remotemysql.com',
       port: 3306,
-      username: 'root',
-      password: '123456',
-      database: 'desafio1',
+      username: 'fXeOOWfeOv',
+      password: 'mVAOJIzHXW',
+      database: 'fXeOOWfeOv',
       entities: Object.keys(Models).map((modelName) => Models[modelName]),
       synchronize: true,
       autoLoadEntities: true,
