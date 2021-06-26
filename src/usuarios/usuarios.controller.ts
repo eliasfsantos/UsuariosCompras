@@ -12,16 +12,15 @@ export class UsuariosController {
   }
 
   @Get('/:id')
-  readUser(@Param('id') id) {
-
-    return this.usuarioService.findOne(id)
-
+  async readUser(@Param('id') id) {
+    const usuario = await this.usuarioService.findOne(id)
+    if (usuario) return this.usuarioService.findOne(id)
+    else throw new HttpException('usuario não encontrado', HttpStatus.NOT_FOUND)
   }
   @Get('/:id/compras')
   ComprasUsuario(@Param('id') id) {
     return this.usuarioService.comprasUsuario(id)
   }
-
 
   @Post('/')
   //@UsePipes(new ValidationPipe({ transform: true })) // foi adicionado globalmente em main.ts

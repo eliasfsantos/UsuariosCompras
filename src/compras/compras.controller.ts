@@ -18,10 +18,12 @@ export class ComprasController {
 
   @Get(':id')
   async readCompra(@Param('id') id: number) {
-    return {
+    const compra = await this.comprasService.read(id)
+    if (compra) return {
       statusCode: HttpStatus.OK,
-      data: await this.comprasService.read(id),
-    };
+      data: compra,
+    }
+    else throw new HttpException('compra não encontrada', HttpStatus.NOT_FOUND)
   }
 
   @Post()
