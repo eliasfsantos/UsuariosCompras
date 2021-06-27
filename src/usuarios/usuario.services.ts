@@ -33,7 +33,6 @@ export class UsuarioService {
   }
 
   async criar(data: CriarUsuarioDto): Promise<Usuario> {
-
     const novoEndereco = data.endereco
     const novoUsuario = this.usuarioRepository.create(data)
     novoEndereco.usuario = novoUsuario
