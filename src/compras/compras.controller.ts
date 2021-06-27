@@ -34,8 +34,8 @@ export class ComprasController {
         return {
           statusCode: HttpStatus.CREATED,
           message: 'Compra adicionada com sucesso',
-          data: await this.comprasService.criar(data),
-        };
+          data: await this.comprasService.criar(data)
+        }
       }
       else {
         throw new HttpException('endereço não encontrado', HttpStatus.NOT_FOUND)
