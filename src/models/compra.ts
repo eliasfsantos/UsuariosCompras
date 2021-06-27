@@ -1,4 +1,4 @@
-import { IsDefined, IsISO8601 } from "class-validator";
+import { IsDefined, IsISO8601, MinLength } from "class-validator";
 import { Endereco } from "src/models/endereco";
 import { Usuario } from "src/models/usuario";
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
@@ -13,10 +13,12 @@ export class Compra {
     @JoinColumn()
     usuario: Usuario
 
+    @MinLength(1)
     @IsDefined()
     @Column()
     total: string;
 
+    @MinLength(1)
     @IsDefined()
     @Column()
     loja: string;

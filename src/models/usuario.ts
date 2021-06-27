@@ -8,15 +8,12 @@ export class Usuario {
   id: number;
 
   @Column()
-  @Length(4, 255)
   nome: string;
 
   @Column({ unique: true })
-  @IsEmail()
   email: string;
 
   @Column()
-  @Length(8, 255)
   senha: string;
 
   @ValidateNested()

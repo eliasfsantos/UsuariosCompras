@@ -18,11 +18,14 @@ export class UsuarioService {
   ) { }
 
   async findAll(): Promise<Usuario[]> {
-    return this.usuarioRepository.find({ relations: ["enderecos"] });
+    return await this.usuarioRepository.find({ relations: ["enderecos"] });
   }
 
   async findOne(id: number): Promise<Usuario> {
-    return this.usuarioRepository.findOne({ where: { id: id }, relations: ["enderecos"] });
+    return await this.usuarioRepository.findOne({ where: { id: id }, relations: ["enderecos"] });
+  }
+  async findByEmail(email: string): Promise<Usuario> {
+    return await this.usuarioRepository.findOne({ where: { email: email }});
   }
 
   async comprasUsuario(usuario: Usuario): Promise<Compra[]> {

@@ -7,6 +7,7 @@ import { Compra, Endereco, Usuario } from 'src/models';
 @Module({
   imports: [TypeOrmModule.forFeature([Usuario, Endereco, Compra])],
   controllers: [UsuariosController],
-  providers: [UsuarioService]
+  providers: [UsuarioService],
+  exports: [UsuarioService]
 })
 export class UsuariosModule {}

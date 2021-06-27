@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpStatus, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, HttpException, HttpStatus, Param, Post } from '@nestjs/common';
 import { CriarUsuarioDto } from './dto/criarUsuarioDto';
 import { UsuarioService } from './usuario.services';
 
@@ -12,8 +12,10 @@ export class UsuariosController {
   }
 
   @Get('/:id')
-  readUser(@Param('id') id) {
-    return this.usuarioService.findOne(id)
+  async readUser(@Param('id') id) {
+    const usuario = await this.usuarioService.findOne(id)
+    if (usuario) return this.usuarioService.findOne(id)
+    else throw new HttpException('usuario não encontrado', HttpStatus.NOT_FOUND)
   }
   @Get('/:id/compras')
   ComprasUsuario(@Param('id') id) {
@@ -23,14 +25,30 @@ export class UsuariosController {
   @Post('/')
   //@UsePipes(new ValidationPipe({ transform: true })) // foi adicionado globalmente em main.ts
   async criarUsuarios(@Body() criarUsuarioDto: CriarUsuarioDto) {
-    if (criarUsuarioDto.confirmacaoDeSenha == criarUsuarioDto.senha) return {
-      statusCode: HttpStatus.CREATED,
-      message: 'Usuario adicionado com sucesso',
-      data: await this.usuarioService.criar(criarUsuarioDto)
+    const usuarioDoEmail = await this.usuarioService.findByEmail(criarUsuarioDto.email)
+    if (criarUsuarioDto.confirmacaoDeSenha == criarUsuarioDto.senha && hasNumber(criarUsuarioDto.senha)) {
+      if (usuarioDoEmail != undefined) {
+        if (criarUsuarioDto.email != usuarioDoEmail.email) {
+          return {
+            statusCode: HttpStatus.CREATED,
+            message: 'Usuario adicionado com sucesso',
+            data: await this.usuarioService.criar(criarUsuarioDto)
+          }
+        }
+        else {
+          throw new HttpException('e-mail já cadastrado', HttpStatus.CONFLICT)
+        }
+      }
+      else return {
+        statusCode: HttpStatus.CREATED,
+        message: 'Usuario adicionado com sucesso',
+        data: await this.usuarioService.criar(criarUsuarioDto)
+      }
     }
-    else return {
-      statusCode: HttpStatus.NOT_ACCEPTABLE,
-      message: 'senha não confere'
-    }
+    else throw new HttpException('senha não confere/não possui número', HttpStatus.NOT_ACCEPTABLE)
   }
+}
+
+function hasNumber(myString) {
+  return /\d/.test(myString);
 }
